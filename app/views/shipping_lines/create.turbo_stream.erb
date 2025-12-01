@@ -1,0 +1,9 @@
+<%= turbo_stream.append "shipping_lines_list" do %>
+  <div class="border p-4 rounded shadow">
+    <h2 class="text-xl font-semibold"><%= @shipping_line.name %></h2>
+    <%= link_to "Ver Detalles", shipping_line_path(@shipping_line), class: "text-blue-500 hover:underline" %>
+  </div>
+<% end %>
+
+<%= turbo_stream.update "modal" do %>
+<% end %>

@@ -14,7 +14,10 @@ class ShippingLinesController < ApplicationController
   def create
     @shipping_line = ShippingLine.new(shipping_line_params)
     if @shipping_line.save
-      redirect_to shipping_lines_path, notice: "Shipping line created successfully."
+      respond_to do |format|
+        format.html { redirect_to shipping_lines_path, notice: "Shipping line created successfully." }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +30,10 @@ class ShippingLinesController < ApplicationController
   def update
     @shipping_line = ShippingLine.find(params[:id])
     if @shipping_line.update(shipping_line_params)
-      redirect_to shipping_line_path(@shipping_line), notice: "Shipping line updated successfully."
+      respond_to do |format|
+        format.html { redirect_to shipping_lines_path, notice: "Shipping line updated successfully." }
+        format.turbo_stream
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +42,10 @@ class ShippingLinesController < ApplicationController
   def destroy
     @shipping_line = ShippingLine.find(params[:id])
     @shipping_line.destroy
-    redirect_to shipping_lines_path, notice: "Shipping line deleted successfully."
+    respond_to do |format|
+      format.html { redirect_to shipping_lines_path, notice: "Shipping line deleted successfully." }
+      format.turbo_stream
+    end
   end
 
   private
