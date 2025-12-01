@@ -1,5 +1,17 @@
 <div class="container mx-auto mt-8 px-4">
-  <h1 class="text-3xl font-bold mb-6 text-gray-900">Líneas Navieras</h1>
+  <div class="flex items-start mb-6">
+    <div class="bg-blue-600 p-3 rounded-lg mr-4 flex-shrink-0">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="5" r="3"/>
+        <line x1="12" y1="22" x2="12" y2="8"/>
+        <path d="m5 12a7 7 0 0 1 14 0"/>
+      </svg>
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">Líneas Navieras</h1>
+      <p class="text-base text-gray-500">Gestión de compañías navieras</p>
+    </div>
+  </div>
 
   <div class="mb-6">
     <%= link_to "Nueva Línea Naviera", new_shipping_line_path, class: "bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200", data: { turbo_frame: "modal" } %>
