@@ -7,9 +7,13 @@
 
   <div class="grid gap-4" id="shipping_lines_list">
     <% @shipping_lines.each do |shipping_line| %>
-      <div class="border p-4 rounded shadow">
+      <div class="border p-4 rounded shadow" id="shipping_line_<%= shipping_line.id %>">
         <h2 class="text-xl font-semibold"><%= shipping_line.name %></h2>
-        <%= link_to "Ver Detalles", shipping_line_path(shipping_line), class: "text-blue-500 hover:underline" %>
+        <div class="mt-2 space-x-2">
+          <%= link_to "Ver Detalles", shipping_line_path(shipping_line), class: "text-blue-500 hover:underline" %>
+          <%= link_to "Editar", edit_shipping_line_path(shipping_line), class: "text-yellow-500 hover:underline", data: { turbo_frame: "modal" } %>
+          <%= button_to "Eliminar", shipping_line_path(shipping_line), method: :delete, class: "text-red-500 hover:underline", data: { turbo_confirm: "Are you sure you want to delete this shipping line?" } %>
+        </div>
       </div>
     <% end %>
   </div>

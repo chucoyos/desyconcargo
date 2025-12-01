@@ -1,4 +1,4 @@
-<%= turbo_stream.append "shipping_lines_list" do %>
+<%= turbo_stream.replace "shipping_line_#{@shipping_line.id}" do %>
   <div class="border p-4 rounded shadow" id="shipping_line_<%= @shipping_line.id %>">
     <h2 class="text-xl font-semibold"><%= @shipping_line.name %></h2>
     <div class="mt-2 space-x-2">
