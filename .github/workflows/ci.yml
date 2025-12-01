@@ -151,7 +151,7 @@ jobs:
           bin/rails db:migrate
           bin/rails db:schema:dump
           bin/rails db:test:prepare
-          bundle exec rspec spec/system/
+          bundle exec rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
