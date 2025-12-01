@@ -1,6 +1,17 @@
 <%= turbo_stream.replace "shipping_line_#{@shipping_line.id}" do %>
-  <tr id="shipping_line_<%= @shipping_line.id %>">
-    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= @shipping_line.name %></td>
+  <tr class="hover:bg-gray-50" id="shipping_line_<%= @shipping_line.id %>">
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <div class="flex items-center">
+        <div class="bg-blue-600 p-1 rounded mr-2">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="5" r="3"/>
+            <line x1="12" y1="22" x2="12" y2="8"/>
+            <path d="m5 12a7 7 0 0 1 14 0"/>
+          </svg>
+        </div>
+        <%= @shipping_line.name %>
+      </div>
+    </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= @shipping_line.created_at.strftime("%d de %b") %></td>
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
       <div class="flex space-x-2 justify-end">
