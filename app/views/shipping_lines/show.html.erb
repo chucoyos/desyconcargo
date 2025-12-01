@@ -1,0 +1,19 @@
+<div class="container mx-auto mt-8 px-4">
+  <h1 class="text-3xl font-bold mb-6">Línea Naviera: <%= @shipping_line.name %></h1>
+
+  <div class="mb-4">
+    <%= link_to "Editar", edit_shipping_line_path(@shipping_line), class: "bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 mr-2", data: { turbo_frame: "modal" } %>
+    <%= button_to "Eliminar", shipping_line_path(@shipping_line), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600", data: { turbo_confirm: "Are you sure?" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= link_to "Nueva Línea Naviera", new_shipping_line_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600", data: { turbo_frame: "modal" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= link_to "Volver a la Lista", shipping_lines_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+  </div>
+
+  <!-- Turbo Frame for Modal -->
+  <%= turbo_frame_tag "modal" %>
+</div>
