@@ -20,6 +20,12 @@ function setupToastAutoHide() {
     // Mark this toast as having auto-hide setup
     toast.classList.add('toast-auto-hide-setup');
     
+    // Slide in animation
+    setTimeout(function() {
+      toast.classList.remove('translate-x-full');
+      toast.style.transform = 'translateX(0)';
+    }, 10);
+    
     // Auto-hide after 5 seconds
     setTimeout(function() {
       hideToast(toast);
@@ -36,8 +42,16 @@ function setupToastObserver() {
     mutations.forEach(function(mutation) {
       mutation.addedNodes.forEach(function(node) {
         if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('toast')) {
-          // New toast added, setup auto-hide
+          // New toast added, setup slide-in and auto-hide
           node.classList.add('toast-auto-hide-setup');
+          
+          // Slide in animation
+          setTimeout(function() {
+            node.classList.remove('translate-x-full');
+            node.style.transform = 'translateX(0)';
+          }, 10);
+          
+          // Auto-hide after 5 seconds
           setTimeout(function() {
             hideToast(node);
           }, 5000);
