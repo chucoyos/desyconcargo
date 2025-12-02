@@ -4,12 +4,12 @@ RSpec.describe "ports/index", type: :view do
   before(:each) do
     ports = [
       Port.create!(
-        name: "Name",
+        name: "Port One",
         country: "US",
         uncode: "ABCDE"
       ),
       Port.create!(
-        name: "Name",
+        name: "Port Two",
         country: "ES",
         uncode: "FGHIJ"
       )
@@ -19,7 +19,8 @@ RSpec.describe "ports/index", type: :view do
 
   it "renders a list of ports" do
     render
-    assert_select "h3", text: "Name", count: 2
+    assert_select "h3", text: "Port One", count: 1
+    assert_select "h3", text: "Port Two", count: 1
     assert_select "p", text: /United States • ABCDE/, count: 1
     assert_select "p", text: /Spain • FGHIJ/, count: 1
   end
