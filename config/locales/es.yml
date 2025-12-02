@@ -20,6 +20,7 @@ es:
         updated_at: "Fecha de Actualización"
     errors:
       messages:
+        record_invalid: "La validación falló: %{errors}"
         taken: "ya está en uso"
   helpers:
     submit:

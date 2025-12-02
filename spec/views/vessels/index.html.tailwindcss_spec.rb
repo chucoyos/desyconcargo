@@ -2,22 +2,24 @@ require 'rails_helper'
 
 RSpec.describe "vessels/index", type: :view do
   before(:each) do
-    assign(:vessels, [
+    shipping_line = ShippingLine.create!(name: "Test Line")
+    vessels = [
       Vessel.create!(
-        name: "Name",
-        shipping_line: nil
+        name: "Vessel One",
+        shipping_line: shipping_line
       ),
       Vessel.create!(
-        name: "Name",
-        shipping_line: nil
+        name: "Vessel Two",
+        shipping_line: shipping_line
       )
-    ])
+    ]
+    assign(:vessels, Kaminari.paginate_array(vessels).page(1))
   end
 
   it "renders a list of vessels" do
     render
-    cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    assert_select "table tbody tr", count: 2
+    assert_select "table tbody tr td", text: "Vessel One"
+    assert_select "table tbody tr td", text: "Vessel Two"
   end
 end

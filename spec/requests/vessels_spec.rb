@@ -13,16 +13,22 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/vessels", type: :request do
-  
   # This should return the minimal set of attributes required to create a valid
   # Vessel. As you add validations to Vessel, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    shipping_line = ShippingLine.create!(name: "Test Line")
+    {
+      name: "Test Vessel",
+      shipping_line_id: shipping_line.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: "",
+      shipping_line_id: nil
+    }
   }
 
   describe "GET /index" do
@@ -64,9 +70,9 @@ RSpec.describe "/vessels", type: :request do
         }.to change(Vessel, :count).by(1)
       end
 
-      it "redirects to the created vessel" do
+      it "redirects to the vessels list" do
         post vessels_url, params: { vessel: valid_attributes }
-        expect(response).to redirect_to(vessel_url(Vessel.last))
+        expect(response).to redirect_to(vessels_url)
       end
     end
 
@@ -87,21 +93,25 @@ RSpec.describe "/vessels", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        shipping_line = ShippingLine.create!(name: "Another Line")
+        {
+          name: "Updated Vessel",
+          shipping_line_id: shipping_line.id
+        }
       }
 
       it "updates the requested vessel" do
         vessel = Vessel.create! valid_attributes
         patch vessel_url(vessel), params: { vessel: new_attributes }
         vessel.reload
-        skip("Add assertions for updated state")
+        expect(vessel.name).to eq("Updated Vessel")
       end
 
-      it "redirects to the vessel" do
+      it "redirects to the vessels list" do
         vessel = Vessel.create! valid_attributes
         patch vessel_url(vessel), params: { vessel: new_attributes }
         vessel.reload
-        expect(response).to redirect_to(vessel_url(vessel))
+        expect(response).to redirect_to(vessels_url)
       end
     end
 

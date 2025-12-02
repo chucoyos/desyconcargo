@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "vessels/show", type: :view do
   before(:each) do
+    shipping_line = ShippingLine.create!(name: "Test Line")
     assign(:vessel, Vessel.create!(
       name: "Name",
-      shipping_line: nil
+      shipping_line: shipping_line
     ))
   end
 
