@@ -22,7 +22,18 @@ es:
       messages:
         record_invalid: "La validación falló: %{errors}"
         taken: "ya está en uso"
-  helpers:
-    submit:
-      create: "Crear %{model}"
-      update: "Actualizar %{model}"
+  shipping_lines:
+    create:
+      success: "Línea naviera creada exitosamente."
+    update:
+      success: "Línea naviera actualizada exitosamente."
+    destroy:
+      success: "Línea naviera eliminada exitosamente."
+      error_with_vessels: "No se puede eliminar la línea naviera '%{name}' porque tiene buques asociados. Por favor reasigne o elimine los buques primero."
+  vessels:
+    create:
+      success: "Buque creado exitosamente."
+    update:
+      success: "Buque actualizado exitosamente."
+    destroy:
+      success: "Buque eliminado exitosamente."

@@ -19,7 +19,7 @@ class ShippingLinesController < ApplicationController
     @shipping_line = ShippingLine.new(shipping_line_params)
     if @shipping_line.save
       respond_to do |format|
-        format.html { redirect_to shipping_lines_path, notice: "Shipping line created successfully." }
+        format.html { redirect_to shipping_lines_path, notice: I18n.t("shipping_lines.create.success") }
         format.turbo_stream
       end
     else
@@ -35,7 +35,7 @@ class ShippingLinesController < ApplicationController
     @shipping_line = ShippingLine.find(params[:id])
     if @shipping_line.update(shipping_line_params)
       respond_to do |format|
-        format.html { redirect_to shipping_lines_path, notice: "Shipping line updated successfully." }
+        format.html { redirect_to shipping_lines_path, notice: I18n.t("shipping_lines.update.success") }
         format.turbo_stream
       end
     else
@@ -45,10 +45,23 @@ class ShippingLinesController < ApplicationController
 
   def destroy
     @shipping_line = ShippingLine.find(params[:id])
-    @shipping_line.destroy
-    respond_to do |format|
-      format.html { redirect_to shipping_lines_path, notice: "Shipping line deleted successfully." }
-      format.turbo_stream
+
+    if @shipping_line.vessels.exists?
+      respond_to do |format|
+        format.html do
+          redirect_to shipping_lines_path, alert: I18n.t("shipping_lines.destroy.error_with_vessels", name: @shipping_line.name)
+        end
+        format.turbo_stream do
+          flash.now[:alert] = I18n.t("shipping_lines.destroy.error_with_vessels", name: @shipping_line.name)
+          render turbo_stream: turbo_stream.update("flash", partial: "shared/flash")
+        end
+      end
+    else
+      @shipping_line.destroy
+      respond_to do |format|
+        format.html { redirect_to shipping_lines_path, notice: I18n.t("shipping_lines.destroy.success") }
+        format.turbo_stream
+      end
     end
   end
 

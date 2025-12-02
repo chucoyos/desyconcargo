@@ -29,7 +29,7 @@ class VesselsController < ApplicationController
 
     respond_to do |format|
       if @vessel.save
-        format.html { redirect_to vessels_path, notice: "Vessel was successfully created." }
+        format.html { redirect_to vessels_path, notice: I18n.t("vessels.create.success") }
         format.turbo_stream
         format.json { render :show, status: :created, location: @vessel }
       else
@@ -43,7 +43,7 @@ class VesselsController < ApplicationController
   def update
     respond_to do |format|
       if @vessel.update(vessel_params)
-        format.html { redirect_to vessels_path, notice: "Vessel was successfully updated." }
+        format.html { redirect_to vessels_path, notice: I18n.t("vessels.update.success") }
         format.turbo_stream
         format.json { render :show, status: :ok, location: @vessel }
       else
@@ -58,7 +58,7 @@ class VesselsController < ApplicationController
     @vessel.destroy!
 
     respond_to do |format|
-      format.html { redirect_to vessels_path, notice: "Vessel was successfully destroyed." }
+      format.html { redirect_to vessels_path, notice: I18n.t("vessels.destroy.success") }
       format.turbo_stream
       format.json { head :no_content }
     end
