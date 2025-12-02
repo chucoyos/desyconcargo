@@ -1,44 +1,47 @@
-<div class="container mx-auto mt-8 px-4 my-12">
-  <div class="flex items-start mb-6">
-    <div class="bg-blue-600 p-3 rounded-lg mr-4 flex-shrink-0">
+<div class="container mx-auto mt-8 px-4 sm:px-6 lg:px-8 my-12">
+  <div class="flex flex-col sm:flex-row items-start mb-6">
+    <div class="bg-blue-600 p-3 rounded-lg mb-4 sm:mb-0 sm:mr-4 flex-shrink-0">
       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="12" cy="5" r="3"/>
         <line x1="12" y1="22" x2="12" y2="8"/>
         <path d="m5 12a7 7 0 0 1 14 0"/>
       </svg>
     </div>
-    <div class="flex-1">
-      <div class="flex justify-between items-center mb-2">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">Líneas Navieras</h1>
-          <p class="text-base text-gray-500">Gestión de compañías navieras</p>
+    <div class="flex-1 w-full sm:w-auto">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+        <div class="mb-4 sm:mb-0">
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Líneas Navieras</h1>
+          <p class="text-sm sm:text-base text-gray-500">Gestión de compañías navieras</p>
         </div>
-        <div class="ml-4">
-          <%= link_to "Nueva Línea Naviera", new_shipping_line_path, class: "bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200", data: { turbo_frame: "modal" } %>
+        <div class="w-full sm:w-auto sm:ml-4">
+          <%= link_to "Nueva Línea Naviera", new_shipping_line_path, class: "w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200 text-center", data: { turbo_frame: "modal" } %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
+  <div class="bg-white shadow-lg rounded-lg p-4 sm:p-6 mb-6">
     <div class="flex items-center mb-4">
-      <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
       </svg>
-      <h3 class="text-lg font-medium text-gray-900 ml-2">Buscar Líneas Navieras</h3>
+      <h3 class="text-base sm:text-lg font-medium text-gray-900 ml-2">Buscar Líneas Navieras</h3>
     </div>
-    <%= form_with url: shipping_lines_path, method: :get, class: "flex space-x-2" do |f| %>
+    <%= form_with url: shipping_lines_path, method: :get, class: "flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2" do |f| %>
       <%= f.hidden_field :page, value: 1 %>
-      <%= f.text_field :query, value: params[:query], placeholder: "Buscar líneas navieras...", class: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-      <%= f.select :per_page, options_for_select([10, 20, 50], params[:per_page] || 10), {}, class: "px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500", onchange: "this.form.submit()" %>
-      <%= f.submit "Buscar", class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200" %>
-      <% if params[:query].present? %>
-        <%= link_to "Limpiar", shipping_lines_path, class: "bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200" %>
-      <% end %>
+      <%= f.text_field :query, value: params[:query], placeholder: "Buscar líneas navieras...", class: "flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base" %>
+      <div class="flex space-x-2">
+        <%= f.select :per_page, options_for_select([10, 20, 50], params[:per_page] || 10), {}, class: "px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base", onchange: "this.form.submit()" %>
+        <%= f.submit "Buscar", class: "bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200 text-sm sm:text-base" %>
+        <% if params[:query].present? %>
+          <%= link_to "Limpiar", shipping_lines_path, class: "bg-gray-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200 text-center text-sm sm:text-base" %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
-  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+  <!-- Desktop Table View -->
+  <div class="hidden md:block bg-white shadow-md rounded-lg overflow-hidden">
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
@@ -65,9 +68,6 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= shipping_line.created_at.strftime("%d de %b") %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <div class="flex space-x-2 justify-end">
-                <%#= link_to shipping_line_path(shipping_line), class: "text-blue-600 hover:text-blue-900" do %>
-                  <%# <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg> %>
-                <%# end %>
                 <%= link_to edit_shipping_line_path(shipping_line), class: "text-yellow-600 hover:text-yellow-900", data: { turbo_frame: "modal" } do %>
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 <% end %>
@@ -82,8 +82,39 @@
     </table>
   </div>
 
+  <!-- Mobile Card View -->
+  <div class="md:hidden space-y-4" id="shipping_lines_list_mobile">
+    <% @shipping_lines.each do |shipping_line| %>
+      <div class="bg-white shadow-md rounded-lg p-4 hover:bg-gray-50" id="shipping_line_mobile_<%= shipping_line.id %>">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center flex-1">
+            <div class="bg-blue-600 p-2 rounded mr-3 flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="5" r="3"/>
+                <line x1="12" y1="22" x2="12" y2="8"/>
+                <path d="m5 12a7 7 0 0 1 14 0"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-medium text-gray-900 truncate"><%= shipping_line.name %></h3>
+              <p class="text-xs text-gray-400 mt-1"><%= shipping_line.created_at.strftime("%d de %b") %></p>
+            </div>
+          </div>
+          <div class="flex space-x-2 ml-2">
+            <%= link_to edit_shipping_line_path(shipping_line), class: "text-yellow-600 hover:text-yellow-900 p-1", data: { turbo_frame: "modal" } do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <% end %>
+            <%= button_to shipping_line_path(shipping_line), method: :delete, class: "text-red-600 hover:text-red-900 bg-transparent border-none p-1", data: { turbo_confirm: "Are you sure you want to delete this shipping line?" } do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <div class="mt-6 flex justify-center">
-    <%= paginate @shipping_lines, class: "flex space-x-2" %>
+    <%= paginate @shipping_lines, class: "flex flex-wrap justify-center space-x-1 sm:space-x-2" %>
   </div>
 
   <!-- Turbo Frame for Modal -->
