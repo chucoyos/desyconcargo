@@ -53,7 +53,7 @@ class ShippingLinesController < ApplicationController
         end
         format.turbo_stream do
           flash.now[:alert] = I18n.t("shipping_lines.destroy.error_with_vessels", name: @shipping_line.name)
-          render turbo_stream: turbo_stream.update("flash", partial: "shared/flash")
+          render turbo_stream: turbo_stream.append("toast-container", partial: "shared/toast_message", locals: { type: :alert, message: flash.now[:alert] })
         end
       end
     else
