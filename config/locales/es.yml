@@ -7,9 +7,15 @@ es:
   activerecord:
     models:
       shipping_line: "Línea Naviera"
+      vessel: "Buque"
     attributes:
       shipping_line:
         name: "Nombre"
+        created_at: "Fecha de Creación"
+        updated_at: "Fecha de Actualización"
+      vessel:
+        name: "Nombre"
+        shipping_line: "Línea Naviera"
         created_at: "Fecha de Creación"
         updated_at: "Fecha de Actualización"
     errors:
