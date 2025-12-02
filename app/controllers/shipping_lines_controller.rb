@@ -2,9 +2,9 @@ class ShippingLinesController < ApplicationController
   def index
     @shipping_lines = if params[:query].present?
                         ShippingLine.where("name ILIKE ?", "%#{params[:query]}%")
-                      else
+    else
                         ShippingLine.all
-                      end
+    end
   end
 
   def show
