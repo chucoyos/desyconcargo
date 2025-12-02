@@ -14,7 +14,10 @@
   </div>
 
   <div class="mb-6">
-    <%= link_to "Nueva Línea Naviera", new_shipping_line_path, class: "bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200", data: { turbo_frame: "modal" } %>
+    <%= form_with url: shipping_lines_path, method: :get, class: "flex space-x-2" do |f| %>
+      <%= f.text_field :query, value: params[:query], placeholder: "Buscar líneas navieras...", class: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
+      <%= f.submit "Buscar", class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200" %>
+    <% end %>
   </div>
 
   <div class="bg-white shadow-md rounded-lg overflow-hidden">
