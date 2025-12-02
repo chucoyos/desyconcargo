@@ -28,8 +28,9 @@
       <h3 class="text-lg font-medium text-gray-900 ml-2">Buscar Líneas Navieras</h3>
     </div>
     <%= form_with url: shipping_lines_path, method: :get, class: "flex space-x-2" do |f| %>
+      <%= f.hidden_field :page, value: 1 %>
       <%= f.text_field :query, value: params[:query], placeholder: "Buscar líneas navieras...", class: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-      <%= f.select :per_page, options_for_select([10, 20, 50], params[:per_page] || 10), {}, class: "px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
+      <%= f.select :per_page, options_for_select([10, 20, 50], params[:per_page] || 10), {}, class: "px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500", onchange: "this.form.submit()" %>
       <%= f.submit "Buscar", class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200" %>
       <% if params[:query].present? %>
         <%= link_to "Limpiar", shipping_lines_path, class: "bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200" %>
