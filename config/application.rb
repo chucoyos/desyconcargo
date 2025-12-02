@@ -14,7 +14,7 @@ module Desyconcargo
     config.load_defaults 8.1
 
     # Set timezone to Mexico City
-    config.time_zone = 'America/Mexico_City'
+    config.time_zone = "America/Mexico_City"
 
     # Set default locale to Spanish
     config.i18n.default_locale = :es
