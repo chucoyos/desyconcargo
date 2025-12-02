@@ -1,0 +1,5 @@
+<%# app/views/ports/destroy.turbo_stream.erb %>
+<%= turbo_stream.remove "port_#{@port.id}" %>
+<%= turbo_stream.remove "port_mobile_#{@port.id}" %>
+
+<%= turbo_stream.append "toast-container", partial: "shared/toast_message", locals: { type: :notice, message: I18n.t('ports.destroy.success') } %>

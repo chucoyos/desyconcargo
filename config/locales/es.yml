@@ -8,6 +8,7 @@ es:
     models:
       shipping_line: "Línea Naviera"
       vessel: "Buque"
+      port: "Puerto"
     attributes:
       shipping_line:
         name: "Nombre"
@@ -17,6 +18,12 @@ es:
         name: "Nombre"
         shipping_line: "Línea Naviera"
         shipping_line_id: "Línea Naviera"
+        created_at: "Fecha de Creación"
+        updated_at: "Fecha de Actualización"
+      port:
+        name: "Nombre"
+        country: "País"
+        uncode: "Código UN"
         created_at: "Fecha de Creación"
         updated_at: "Fecha de Actualización"
     errors:
@@ -31,6 +38,7 @@ es:
       invalid: "no es válido"
       confirmation: "no coincide con la confirmación"
       accepted: "debe ser aceptado"
+      inclusion: "no está incluido en la lista"
       too_long:
         one: "es demasiado largo (máximo %{count} carácter)"
         other: "es demasiado largo (máximo %{count} caracteres)"
@@ -64,3 +72,10 @@ es:
       success: "Buque actualizado exitosamente."
     destroy:
       success: "Buque eliminado exitosamente."
+  ports:
+    create:
+      success: "Puerto creado exitosamente."
+    update:
+      success: "Puerto actualizado exitosamente."
+    destroy:
+      success: "Puerto eliminado exitosamente."
