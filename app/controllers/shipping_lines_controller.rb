@@ -1,9 +1,9 @@
 class ShippingLinesController < ApplicationController
   def index
     @shipping_lines = if params[:query].present?
-                        ShippingLine.where("name ILIKE ?", "%#{params[:query]}%")
+                        ShippingLine.where("name ILIKE ?", "%#{params[:query]}%").page(params[:page]).per(params[:per_page] || 10)
     else
-                        ShippingLine.all
+                        ShippingLine.all.page(params[:page]).per(params[:per_page] || 10)
     end
   end
 
