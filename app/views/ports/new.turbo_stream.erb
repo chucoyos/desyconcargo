@@ -1,0 +1,4 @@
+<%# app/views/ports/new.turbo_stream.erb %>
+<%= turbo_stream.replace "modal" do %>
+  <%= render "form", port: @port %>
+<% end %>
