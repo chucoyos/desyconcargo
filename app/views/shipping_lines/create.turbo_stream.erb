@@ -54,4 +54,6 @@
   </div>
 <% end %>
 
+<%= turbo_stream.append "toast-container", partial: "shared/toast_message", locals: { type: :notice, message: I18n.t('shipping_lines.create.success') } %>
+
 <%= turbo_stream.update "modal", "" %>
