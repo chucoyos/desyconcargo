@@ -11,13 +11,16 @@ class ShippingLinesController < ApplicationController
 
   def show
     @shipping_line = ShippingLine.find(params[:id])
+    authorize @shipping_line
   end
 
   def new
     @shipping_line = ShippingLine.new
+    authorize ShippingLine
   end
 
   def create
+    authorize ShippingLine
     @shipping_line = ShippingLine.new(shipping_line_params)
     if @shipping_line.save
       respond_to do |format|
@@ -31,10 +34,12 @@ class ShippingLinesController < ApplicationController
 
   def edit
     @shipping_line = ShippingLine.find(params[:id])
+    authorize @shipping_line
   end
 
   def update
     @shipping_line = ShippingLine.find(params[:id])
+    authorize @shipping_line
     if @shipping_line.update(shipping_line_params)
       respond_to do |format|
         format.html { redirect_to shipping_lines_path, notice: I18n.t("shipping_lines.update.success") }
@@ -47,6 +52,7 @@ class ShippingLinesController < ApplicationController
 
   def destroy
     @shipping_line = ShippingLine.find(params[:id])
+    authorize @shipping_line
 
     if @shipping_line.vessels.exists?
       respond_to do |format|

@@ -25,14 +25,17 @@ class VesselsController < ApplicationController
   # GET /vessels/new
   def new
     @vessel = Vessel.new
+    authorize Vessel
   end
 
   # GET /vessels/1/edit
   def edit
+    authorize @vessel
   end
 
   # POST /vessels or /vessels.json
   def create
+    authorize Vessel
     @vessel = Vessel.new(vessel_params)
 
     respond_to do |format|
@@ -49,6 +52,7 @@ class VesselsController < ApplicationController
 
   # PATCH/PUT /vessels/1 or /vessels/1.json
   def update
+    authorize @vessel
     respond_to do |format|
       if @vessel.update(vessel_params)
         format.html { redirect_to vessels_path, notice: I18n.t("vessels.update.success") }
@@ -63,6 +67,7 @@ class VesselsController < ApplicationController
 
   # DELETE /vessels/1 or /vessels/1.json
   def destroy
+    authorize @vessel
     @vessel.destroy!
 
     respond_to do |format|

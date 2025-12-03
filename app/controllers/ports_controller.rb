@@ -19,14 +19,17 @@ class PortsController < ApplicationController
   # GET /ports/new
   def new
     @port = Port.new
+    authorize Port
   end
 
   # GET /ports/1/edit
   def edit
+    authorize @port
   end
 
   # POST /ports or /ports.json
   def create
+    authorize Port
     @port = Port.new(port_params)
 
     respond_to do |format|
@@ -44,6 +47,7 @@ class PortsController < ApplicationController
 
   # PATCH/PUT /ports/1 or /ports/1.json
   def update
+    authorize @port
     respond_to do |format|
       if @port.update(port_params)
         format.html { redirect_to ports_path, notice: I18n.t("ports.update.success") }
@@ -59,6 +63,7 @@ class PortsController < ApplicationController
 
   # DELETE /ports/1 or /ports/1.json
   def destroy
+    authorize @port
     @port.destroy!
 
     respond_to do |format|
