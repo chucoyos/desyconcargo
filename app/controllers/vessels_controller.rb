@@ -3,7 +3,7 @@ class VesselsController < ApplicationController
 
   # GET /vessels or /vessels.json
   def index
-    @vessels = Vessel.includes(:shipping_line).all
+    @vessels = policy_scope(Vessel).includes(:shipping_line)
 
     # Apply search filter
     if params[:query].present?

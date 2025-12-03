@@ -3,10 +3,12 @@ class PortsController < ApplicationController
 
   # GET /ports or /ports.json
   def index
-    @ports = if params[:query].present?
-               Port.where("name ILIKE ? OR uncode ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%").page(params[:page]).per(params[:per_page] || 10)
-    else
-               Port.all.page(params[:page]).per(params[:per_page] || 10)
+    @ports = policy_scope(Port).then do |scoped_ports|
+      if params[:query].present?
+        scoped_ports.where("name ILIKE ? OR uncode ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+      else
+        scoped_ports
+      end.page(params[:page]).per(params[:per_page] || 10)
     end
   end
 

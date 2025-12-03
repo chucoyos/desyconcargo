@@ -1,9 +1,11 @@
 class ShippingLinesController < ApplicationController
   def index
-    @shipping_lines = if params[:query].present?
-                        ShippingLine.where("name ILIKE ?", "%#{params[:query]}%").page(params[:page]).per(params[:per_page] || 10)
-    else
-                        ShippingLine.all.page(params[:page]).per(params[:per_page] || 10)
+    @shipping_lines = policy_scope(ShippingLine).then do |scoped_lines|
+      if params[:query].present?
+        scoped_lines.where("name ILIKE ?", "%#{params[:query]}%")
+      else
+        scoped_lines
+      end.page(params[:page]).per(params[:per_page] || 10)
     end
   end
 
