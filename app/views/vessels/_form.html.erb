@@ -1,28 +1,87 @@
-<div class="fixed inset-0 flex items-center justify-center z-50">
-  <div class="bg-white p-8 rounded-lg shadow-xl max-w-md mx-auto w-full">
-    <h2 class="text-2xl font-bold mb-6 text-gray-900"><%= @vessel.new_record? ? "Nuevo Buque" : "Editar Buque" %></h2>
+<div class="fixed inset-0 flex items-center justify-center z-50 p-4">
+  <!-- Material Design Modal Card -->
+  <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 overflow-hidden transform animate-in zoom-in-95 duration-300 ease-out" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
 
-    <%= form_with(model: @vessel, class: "space-y-6") do |form| %>
-      <div>
-        <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.text_field :name, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:outline-none" %>
-        <% if @vessel.errors[:name].any? %>
-          <p class="text-red-500 text-sm mt-1"><%= @vessel.errors[:name].join(", ") %></p>
-        <% end %>
+    <!-- Material Design Header -->
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+      <div class="flex items-center space-x-3">
+        <div class="flex-shrink-0">
+          <% if @vessel.new_record? %>
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              </svg>
+            </div>
+          <% else %>
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold text-gray-900"><%= @vessel.new_record? ? "Nuevo Buque" : "Editar Buque" %></h2>
+          <p class="text-sm text-gray-600 mt-0.5"><%= @vessel.new_record? ? "Registrar un nuevo buque en el sistema" : "Modificar la información del buque" %></p>
+        </div>
       </div>
+    </div>
 
-      <div>
-        <%= form.label :shipping_line_id, "Línea Naviera", class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.collection_select :shipping_line_id, ShippingLine.all, :id, :name, { prompt: "Selecciona una línea naviera" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:outline-none" %>
-        <% if @vessel.errors[:shipping_line_id].any? %>
-          <p class="text-red-500 text-sm mt-1"><%= @vessel.errors[:shipping_line_id].join(", ") %></p>
-        <% end %>
-      </div>
+    <!-- Modal Body -->
+    <div class="px-6 py-6">
+      <%= form_with(model: @vessel, class: "space-y-6") do |form| %>
+        <!-- Material Design Form Fields -->
+        <div class="space-y-6">
+          <div>
+            <label for="vessel_name" class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V8.197m0 0V6.375c0-.621-.504-1.125-1.125-1.125h-2.25c-.621 0-1.125.504-1.125 1.125v1.822M15 21h5.25m0 0H21m-1.5-21h-9a1.5 1.5 0 00-1.5 1.5v6a1.5 1.5 0 001.5 1.5h9z"/>
+              </svg>
+              Nombre del Buque
+            </label>
+            <%= form.text_field :name, class: "block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 bg-white", placeholder: "Ingresa el nombre del buque" %>
+            <% if @vessel.errors[:name].any? %>
+              <p class="mt-2 text-sm text-red-600 flex items-center">
+                <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <%= @vessel.errors[:name].join(", ") %>
+              </p>
+            <% end %>
+          </div>
 
-      <div class="flex justify-end space-x-3">
-        <%= link_to "Cancelar", vessels_path, class: "bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200", data: { turbo_frame: "_top" } %>
-        <%= form.submit class: "bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200" %>
-      </div>
-    <% end %>
+          <div>
+            <label for="vessel_shipping_line_id" class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              Línea Naviera
+            </label>
+            <div class="relative">
+              <%= form.collection_select :shipping_line_id, ShippingLine.all, :id, :name, { prompt: "Selecciona una línea naviera" }, class: "block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 bg-white appearance-none cursor-pointer" %>
+              <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </div>
+            <% if @vessel.errors[:shipping_line_id].any? %>
+              <p class="mt-2 text-sm text-red-600 flex items-center">
+                <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <%= @vessel.errors[:shipping_line_id].join(", ") %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Material Design Action Buttons -->
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100">
+          <%= link_to "Cancelar", vessels_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200", data: { turbo_frame: "_top" } %>
+          <%= form.submit class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
