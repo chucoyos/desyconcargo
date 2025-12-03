@@ -28,10 +28,11 @@
     <%= form_with url: vessels_path, method: :get, class: "flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2" do |f| %>
       <%= f.hidden_field :page, value: 1 %>
       <%= f.text_field :query, value: params[:query], placeholder: "Buscar buques...", class: "flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 text-sm sm:text-base" %>
+      <%= f.select :shipping_line_id, options_for_select([["Todas las líneas", ""]] + ShippingLine.all.map { |sl| [sl.name, sl.id] }, params[:shipping_line_id]), {}, class: "px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 text-sm sm:text-base" %>
       <div class="flex space-x-2">
         <%= f.select :per_page, options_for_select([10, 20, 50], params[:per_page] || 10), {}, class: "px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 text-sm sm:text-base", onchange: "this.form.submit()" %>
         <%= f.submit "Buscar", class: "bg-green-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200 text-sm sm:text-base" %>
-        <% if params[:query].present? %>
+        <% if params[:query].present? || params[:shipping_line_id].present? %>
           <%= link_to "Limpiar", vessels_path, class: "bg-gray-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200 text-center text-sm sm:text-base" %>
         <% end %>
       </div>

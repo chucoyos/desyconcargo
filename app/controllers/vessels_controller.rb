@@ -3,11 +3,19 @@ class VesselsController < ApplicationController
 
   # GET /vessels or /vessels.json
   def index
-    @vessels = if params[:query].present?
-      Vessel.includes(:shipping_line).where("name ILIKE ?", "%#{params[:query]}%").page(params[:page]).per(params[:per_page] || 10)
-    else
-      Vessel.includes(:shipping_line).all.page(params[:page]).per(params[:per_page] || 10)
+    @vessels = Vessel.includes(:shipping_line).all
+
+    # Apply search filter
+    if params[:query].present?
+      @vessels = @vessels.where("name ILIKE ?", "%#{params[:query]}%")
     end
+
+    # Apply shipping line filter
+    if params[:shipping_line_id].present? && params[:shipping_line_id] != ""
+      @vessels = @vessels.where(shipping_line_id: params[:shipping_line_id])
+    end
+
+    @vessels = @vessels.page(params[:page]).per(params[:per_page] || 10)
   end
 
   # GET /vessels/1 or /vessels/1.json
