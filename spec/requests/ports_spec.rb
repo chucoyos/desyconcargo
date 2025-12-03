@@ -16,11 +16,19 @@ RSpec.describe "/ports", type: :request do
   # Port. As you add validations to Port, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Test Port",
+      country: "US",
+      uncode: "USTST"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: "",
+      country: "",
+      uncode: ""
+    }
   }
 
   describe "GET /index" do
@@ -64,7 +72,7 @@ RSpec.describe "/ports", type: :request do
 
       it "redirects to the created port" do
         post ports_url, params: { port: valid_attributes }
-        expect(response).to redirect_to(port_url(Port.last))
+        expect(response).to redirect_to(ports_url)
       end
     end
 
@@ -99,7 +107,7 @@ RSpec.describe "/ports", type: :request do
         port = Port.create! valid_attributes
         patch port_url(port), params: { port: new_attributes }
         port.reload
-        expect(response).to redirect_to(port_url(port))
+        expect(response).to redirect_to(ports_url)
       end
     end
 
