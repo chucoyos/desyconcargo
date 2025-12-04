@@ -34,26 +34,46 @@
     <% end %>
     
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-40">
-      <div class="container mx-auto px-5">
+    <nav class="bg-gradient-to-r from-green-50 via-white to-green-50 shadow-lg border-b border-green-100 fixed top-0 left-0 right-0 z-40 backdrop-blur-sm">
+      <div class="container mx-auto px-6">
         <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">            <%= link_to root_path, class: "text-xl font-bold text-gray-900" do %>
-              <span class="text-green-600">Desy</span>ConCargo
+          <div class="flex items-center">
+            <%= link_to root_path, class: "text-xl font-bold text-gray-800 hover:text-green-700 transition-colors duration-200" do %>
+              <span class="text-green-600 drop-shadow-sm">Desy</span>ConCargo
             <% end %>
           </div>
           
-          <div class="hidden md:flex space-x-8">            <%= link_to "Inicio", root_path, class: "text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
-            <%= link_to "Líneas Navieras", shipping_lines_path, class: "text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
-            <%= link_to "Buques", vessels_path, class: "text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
-            <%= link_to "Puertos", ports_path, class: "text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
+          <div class="hidden md:flex space-x-6">
+            <%= link_to "Inicio", root_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
+            <%= link_to "Líneas Navieras", shipping_lines_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
+            <%= link_to "Buques", vessels_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
+            <%= link_to "Puertos", ports_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
             
             <!-- Authentication Links -->
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
               <% if user_signed_in? %>
-                <span class="text-gray-700 text-sm">Hola, <%= current_user.email %></span>
-                <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200 bg-transparent border-none cursor-pointer" %>
+                <!-- User Profile Avatar -->
+                <div class="flex items-center space-x-2 bg-white/80 hover:bg-white px-4 py-2 rounded-full transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md border border-gray-200">
+                  <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-sm">
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                  <span class="text-gray-700 text-sm font-medium hidden lg:block"><%= current_user.email.split('@').first %></span>
+                </div>
+                <!-- Logout Button -->
+                <%= button_to destroy_user_session_path, method: :delete, class: "text-gray-600 hover:text-red-600 p-3 rounded-full hover:bg-red-50 transition-all duration-200 bg-transparent border-none cursor-pointer shadow-sm hover:shadow-md", title: "Cerrar Sesión" do %>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                  </svg>
+                <% end %>
               <% else %>
-                <%= link_to "Iniciar Sesión", new_user_session_path, class: "text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
+                <!-- Login Button -->
+                <%= link_to new_user_session_path, class: "text-gray-600 hover:text-green-600 p-3 rounded-full hover:bg-green-50 transition-all duration-200 shadow-sm hover:shadow-md", title: "Iniciar Sesión" do %>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                  </svg>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -68,19 +88,39 @@
           </div>
         </div>
         <div class="md:hidden hidden" id="mobile-menu">
-          <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
-            <%= link_to "Inicio", root_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
-            <%= link_to "Líneas Navieras", shipping_lines_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
-            <%= link_to "Buques", vessels_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
-            <%= link_to "Puertos", ports_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
+          <div class="px-4 pt-3 pb-4 space-y-2 bg-gradient-to-b from-white to-green-50/50 border-t border-green-100 shadow-lg">
+            <%= link_to "Inicio", root_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
+            <%= link_to "Líneas Navieras", shipping_lines_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
+            <%= link_to "Buques", vessels_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
+            <%= link_to "Puertos", ports_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
             
             <!-- Mobile Authentication Links -->
-            <div class="border-t border-gray-200 pt-2 mt-2">
+            <div class="border-t border-gray-200 pt-3 mt-3">
               <% if user_signed_in? %>
-                <div class="px-3 py-2 text-gray-700 text-sm">Hola, <%= current_user.email %></div>
-                <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium bg-transparent border-none cursor-pointer w-full text-left" %>
+                <!-- Mobile User Profile -->
+                <div class="flex items-center space-x-3 px-4 py-3 bg-white/80 rounded-xl mb-2 shadow-sm border border-gray-100">
+                  <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                  <span class="text-gray-700 text-sm font-medium"><%= current_user.email.split('@').first %></span>
+                </div>
+                <!-- Mobile Logout Button -->
+                <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center space-x-3 text-gray-600 hover:text-red-600 w-full px-4 py-3 rounded-xl text-base font-medium hover:bg-red-50 transition-all duration-200 bg-transparent border-none cursor-pointer shadow-sm", title: "Cerrar Sesión" do %>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                  </svg>
+                  <span>Cerrar Sesión</span>
+                <% end %>
               <% else %>
-                <%= link_to "Iniciar Sesión", new_user_session_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
+                <!-- Mobile Login Button -->
+                <%= link_to new_user_session_path, class: "flex items-center space-x-3 text-gray-600 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm", title: "Iniciar Sesión" do %>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                  </svg>
+                  <span>Iniciar Sesión</span>
+                <% end %>
               <% end %>
             </div>
           </div>
