@@ -79,3 +79,10 @@ es:
       success: "Puerto actualizado exitosamente."
     destroy:
       success: "Puerto eliminado exitosamente."
+  roles:
+    create:
+      success: "Rol creado exitosamente."
+    update:
+      success: "Rol actualizado exitosamente."
+    destroy:
+      success: "Rol eliminado exitosamente."

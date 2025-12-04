@@ -1,6 +1,6 @@
 <% if @role.errors.empty? %>
   <%= turbo_stream.append "toast-container" do %>
-    <%= render "shared/toast_message", type: :notice, message: "Role was successfully updated." %>
+    <%= render "shared/toast_message", type: :notice, message: t('roles.update.success') %>
   <% end %>
   <%= turbo_stream.redirect_to @role %>
 <% else %>
