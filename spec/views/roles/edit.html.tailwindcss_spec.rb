@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "roles/edit", type: :view do
   let(:role) {
-    Role.create!()
+    Role.create!(name: 'administrador')
   }
 
   before(:each) do

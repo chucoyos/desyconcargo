@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "roles/index", type: :view do
   before(:each) do
     assign(:roles, [
-      Role.create!(),
-      Role.create!()
+      Role.create!(name: 'administrador'),
+      Role.create!(name: 'consolidador')
     ])
   end
 
