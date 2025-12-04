@@ -6,6 +6,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Suppress deprecation warnings in test environment
+  config.active_support.deprecation = :silence
+
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 
