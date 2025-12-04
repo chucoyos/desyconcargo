@@ -1,0 +1,89 @@
+<div class="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+      <div class="flex justify-center items-center mb-8">
+        <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+          <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 7h-2V4c0-1.1-.9-2-2-2H8C6.9 2 6 2.9 6 4v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM8 4h8v3H8V4zm8 15H8v-4h8v4zm4-6H4V9h16v4z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">
+            <span class="text-green-600">Desy</span>ConCargo
+          </h1>
+          <p class="text-gray-600 text-sm">Sistema de Gestión Logística</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Iniciar Sesión</h2>
+      <p class="text-gray-600">Accede a tu cuenta para continuar</p>
+    </div>
+
+    <!-- Sign In Form -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+        <%= render "devise/shared/error_messages" %>
+
+        <!-- Email Field -->
+        <div class="space-y-2">
+          <label for="user_email" class="block text-sm font-medium text-gray-700">
+            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+            </svg>
+            Correo Electrónico
+          </label>
+          <div class="relative">
+            <%= f.email_field :email,
+                autofocus: true,
+                autocomplete: "email",
+                class: "w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white",
+                placeholder: "tu@email.com" %>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="space-y-2">
+          <label for="user_password" class="block text-sm font-medium text-gray-700">
+            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            Contraseña
+          </label>
+          <div class="relative">
+            <%= f.password_field :password,
+                autocomplete: "current-password",
+                class: "w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white",
+                placeholder: "••••••••" %>
+          </div>
+        </div>
+
+        <!-- Remember Me -->
+        <% if devise_mapping.rememberable? %>
+          <div class="flex items-center">
+            <div class="flex items-center h-5">
+              <%= f.check_box :remember_me,
+                  class: "h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded transition duration-150 ease-in-out" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <%= f.label :remember_me, class: "font-medium text-gray-700" %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Submit Button -->
+        <div>
+          <%= f.submit "Iniciar Sesión",
+              class: "group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center">
+      <p class="text-sm text-gray-600">
+        Sistema seguro de gestión logística • DesyConCargo
+      </p>
+    </div>
+  </div>
+</div>
