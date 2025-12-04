@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   # Devise authentication
-  before_action :authenticate_user! unless Rails.env.test?
+  before_action :authenticate_user!
 
   # Pundit authorization
   include Pundit::Authorization

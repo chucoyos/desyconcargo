@@ -75,6 +75,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "rspec-rails"
+  gem "pundit-matchers", "~> 3.1"
+  gem "rails-controller-testing"
 end
 
 gem "devise", "~> 4.9"

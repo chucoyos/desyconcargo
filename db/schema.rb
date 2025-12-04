@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_03_193842) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_04_082934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_03_193842) do
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.string "uncode"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
@@ -36,10 +42,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_03_193842) do
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.bigint "role_id"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["entity_id"], name: "index_users_on_entity_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   create_table "vessels", force: :cascade do |t|
@@ -50,5 +58,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_03_193842) do
     t.index ["shipping_line_id"], name: "index_vessels_on_shipping_line_id"
   end
 
+  add_foreign_key "users", "roles"
   add_foreign_key "vessels", "shipping_lines"
 end

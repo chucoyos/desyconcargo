@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Crear roles por defecto
+puts "Creando roles por defecto..."
+
+Role.find_or_create_by!(name: Role::ADMINISTRADOR)
+Role.find_or_create_by!(name: Role::AGENTE_ADUANAL)
+Role.find_or_create_by!(name: Role::CONSOLIDADOR)
+Role.find_or_create_by!(name: Role::ALMACEN)
+
+puts "Roles creados exitosamente!"

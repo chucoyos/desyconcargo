@@ -251,6 +251,11 @@ GEM
       nio4r (~> 2.0)
     pundit (2.5.2)
       activesupport (>= 3.0.0)
+    pundit-matchers (3.1.2)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
@@ -275,6 +280,10 @@ GEM
       activesupport (= 8.1.1)
       bundler (>= 1.15.0)
       railties (= 8.1.1)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
@@ -457,7 +466,9 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   pundit (~> 2.5)
+  pundit-matchers (~> 3.1)
   rails (~> 8.1.1)
+  rails-controller-testing
   rspec-rails
   rubocop-rails-omakase
   selenium-webdriver
