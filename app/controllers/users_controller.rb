@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = policy_scope(User)
+    @users = policy_scope(User).includes(:role)
   end
 
   # GET /users/1 or /users/1.json
