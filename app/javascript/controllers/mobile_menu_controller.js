@@ -7,4 +7,17 @@ export default class extends Controller {
   toggle() {
     this.menuTarget.classList.toggle("hidden")
   }
+
+  hide() {
+    this.menuTarget.classList.add("hidden")
+  }
+
+  // Close menu when clicking on links
+  connect() {
+    this.element.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        this.hide()
+      }
+    })
+  }
 }
