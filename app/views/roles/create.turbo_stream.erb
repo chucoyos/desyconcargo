@@ -1,0 +1,10 @@
+<% if @role.persisted? %>
+  <%= turbo_stream.append "toast-container" do %>
+    <%= render "shared/toast_message", type: :notice, message: "Role was successfully created." %>
+  <% end %>
+  <%= turbo_stream.redirect_to @role %>
+<% else %>
+  <%= turbo_stream.replace "role_form" do %>
+    <%= render "form", role: @role %>
+  <% end %>
+<% end %>

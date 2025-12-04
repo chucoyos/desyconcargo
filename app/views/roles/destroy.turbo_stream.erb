@@ -1,0 +1,4 @@
+<%= turbo_stream.append "toast-container" do %>
+  <%= render "shared/toast_message", type: :notice, message: "Role was successfully destroyed." %>
+<% end %>
+<%= turbo_stream.redirect_to roles_path %>
