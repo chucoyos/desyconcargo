@@ -51,10 +51,34 @@
           </div>
           
           <div class="hidden md:flex space-x-6">
-            <%= link_to "Inicio", root_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
-            <%= link_to "Líneas Navieras", shipping_lines_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
-            <%= link_to "Buques", vessels_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
-            <%= link_to "Puertos", ports_path, class: "relative text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" %>
+            <%= link_to root_path, class: "flex items-center space-x-2 text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+              <span>Inicio</span>
+            <% end %>
+            <%= link_to shipping_lines_path, class: "flex items-center space-x-2 text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>Líneas Navieras</span>
+            <% end %>
+            <%= link_to vessels_path, class: "flex items-center space-x-2 text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 8.527v-.905a1.914 1.914 0 00-.75-.556l-.13-.068a2.397 2.397 0 00-1.912 0l-.13.068c-.247.13-.486.3-.75.556v.905c0 .333.108.638.314.905l.13.068c.426.224.854.216 1.281 0l.13-.068c.206-.267.314-.572.314-.905z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.86 2.139a1.906 1.906 0 01.58-.184l.13-.068c.426-.224.854-.216 1.281 0l.13.068c.185.097.37.207.58.184.482-.063.964.21.964.684v.905c0 .333-.108.638-.314.905l-.13.068c-.426.224-.854.216-1.281 0l-.13-.068a1.35 1.35 0 00-.58-.184c-.482.063-.964-.21-.964-.684v-.905z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12v6.11c0 .884.729 1.623 1.623 1.623s1.623-.739 1.623-1.623V12"/>
+              </svg>
+              <span>Buques</span>
+            <% end %>
+            <%= link_to ports_path, class: "flex items-center space-x-2 text-gray-700 hover:text-green-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-green-50 hover:shadow-sm" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Puertos</span>
+            <% end %>
             
             <!-- Authentication Links -->
             <div class="flex items-center space-x-3">
@@ -96,10 +120,34 @@
         </div>
         <div class="md:hidden hidden" id="mobile-menu" data-mobile-menu-target="menu">
           <div class="px-4 pt-3 pb-4 space-y-2 bg-gradient-to-b from-white to-green-50/50 border-t border-green-100 shadow-lg">
-            <%= link_to "Inicio", root_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
-            <%= link_to "Líneas Navieras", shipping_lines_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
-            <%= link_to "Buques", vessels_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
-            <%= link_to "Puertos", ports_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
+            <%= link_to root_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+              <span>Inicio</span>
+            <% end %>
+            <%= link_to shipping_lines_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>Líneas Navieras</span>
+            <% end %>
+            <%= link_to vessels_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 8.527v-.905a1.914 1.914 0 00-.75-.556l-.13-.068a2.397 2.397 0 00-1.912 0l-.13.068c-.247.13-.486.3-.75.556v.905c0 .333.108.638.314.905l.13.068c.426.224.854.216 1.281 0l.13-.068c.206-.267.314-.572.314-.905z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.86 2.139a1.906 1.906 0 01.58-.184l.13-.068c.426-.224.854-.216 1.281 0l.13.068c.185.097.37.207.58.184.482-.063.964.21.964.684v.905c0 .333-.108.638-.314.905l-.13.068c-.426.224-.854.216-1.281 0l-.13-.068a1.35 1.35 0 00-.58-.184c-.482.063-.964-.21-.964-.684v-.905z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12v6.11c0 .884.729 1.623 1.623 1.623s1.623-.739 1.623-1.623V12"/>
+              </svg>
+              <span>Buques</span>
+            <% end %>
+            <%= link_to ports_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Puertos</span>
+            <% end %>
             
             <!-- Mobile Authentication Links -->
             <div class="border-t border-gray-200 pt-3 mt-3">
