@@ -4,6 +4,11 @@ es:
     abbr_month_names: [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
     day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
     abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+  time:
+    formats:
+      default: "%A, %d de %B de %Y, %H:%M:%S %z"
+      long: "%A, %d de %B de %Y, %H:%M:%S %z"
+      short: "%d/%m/%Y %H:%M"
   activerecord:
     models:
       shipping_line: "Línea Naviera"
@@ -86,3 +91,10 @@ es:
       success: "Rol actualizado exitosamente."
     destroy:
       success: "Rol eliminado exitosamente."
+  users:
+    create:
+      success: "Usuario creado exitosamente."
+    update:
+      success: "Usuario actualizado exitosamente."
+    destroy:
+      success: "Usuario eliminado exitosamente."
