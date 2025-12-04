@@ -34,7 +34,7 @@
     <% end %>
     
     <!-- Navigation -->
-    <nav class="bg-gradient-to-r from-green-50 via-white to-green-50 shadow-lg border-b border-green-100 fixed top-0 left-0 right-0 z-40 backdrop-blur-sm">
+    <nav class="bg-gradient-to-r from-green-50 via-white to-green-50 shadow-lg border-b border-green-100 fixed top-0 left-0 right-0 z-40 backdrop-blur-sm" data-controller="mobile-menu">
       <div class="container mx-auto px-6">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
@@ -87,14 +87,14 @@
           
           <!-- Mobile menu button -->
           <div class="md:hidden">
-            <button type="button" class="text-gray-700 hover:text-green-600 focus:outline-none focus:text-green-600" id="mobile-menu-button">
+            <button type="button" class="text-gray-700 hover:text-green-600 focus:outline-none focus:text-green-600 p-2 rounded-lg hover:bg-green-50 transition-colors duration-200" data-action="mobile-menu#toggle">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
               </svg>
             </button>
           </div>
         </div>
-        <div class="md:hidden hidden" id="mobile-menu">
+        <div class="md:hidden hidden" id="mobile-menu" data-mobile-menu-target="menu">
           <div class="px-4 pt-3 pb-4 space-y-2 bg-gradient-to-b from-white to-green-50/50 border-t border-green-100 shadow-lg">
             <%= link_to "Inicio", root_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
             <%= link_to "Líneas Navieras", shipping_lines_path, class: "flex items-center space-x-3 text-gray-700 hover:text-green-600 px-4 py-3 rounded-xl text-base font-medium hover:bg-green-50 transition-all duration-200 shadow-sm" %>
