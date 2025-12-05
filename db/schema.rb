@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_05_224822) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_05_230408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "colony"
+    t.string "country", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "exterior_number"
+    t.string "interior_number"
+    t.string "municipality"
+    t.string "name", null: false
+    t.string "postal_code", limit: 5, null: false
+    t.string "state", null: false
+    t.string "street"
+    t.datetime "updated_at", null: false
+    t.index ["country", "state", "municipality"], name: "index_addresses_on_country_and_state_and_municipality"
+    t.index ["postal_code"], name: "index_addresses_on_postal_code"
+  end
 
   create_table "fiscal_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
