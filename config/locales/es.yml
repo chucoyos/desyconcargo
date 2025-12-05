@@ -35,6 +35,8 @@ es:
       messages:
         record_invalid: "La validación falló: %{errors}"
         taken: "ya está en uso"
+        restrict_dependent_destroy:
+          has_many: "No se puede eliminar porque hay %{record} dependientes"
   errors:
     messages:
       blank: "no puede estar en blanco"
@@ -91,6 +93,7 @@ es:
       success: "Rol actualizado exitosamente."
     destroy:
       success: "Rol eliminado exitosamente."
+      error: "No se puede eliminar el rol porque hay usuarios asignados a él."
   permissions:
     create:
       success: "Permiso creado exitosamente."

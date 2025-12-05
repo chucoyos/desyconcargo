@@ -58,11 +58,22 @@ class RolesController < ApplicationController
   def destroy
     authorize @role
 
-    @role.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to roles_path, notice: t("roles.destroy.success"), status: :see_other }
-      format.json { head :no_content }
+    if @role.destroy
+      respond_to do |format|
+        format.html { redirect_to roles_path, notice: t("roles.destroy.success"), status: :see_other }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html do
+          if @role.errors[:base].any?
+            redirect_to roles_path, alert: t("roles.destroy.error"), status: :see_other
+          else
+            redirect_to roles_path, alert: @role.errors.full_messages.join(", "), status: :see_other
+          end
+        end
+        format.json { render json: @role.errors, status: :unprocessable_entity }
+      end
     end
   end
 
