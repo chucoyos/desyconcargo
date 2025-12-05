@@ -4,7 +4,12 @@ RSpec.describe RolesController, type: :controller do
   include Devise::Test::ControllerHelpers
 
   let(:admin_role) { Role.find_or_create_by!(name: 'administrador') }
-  let(:regular_role) { Role.find_or_create_by!(name: 'consolidador') }
+  let(:regular_role) do
+    role = Role.find_or_create_by!(name: 'consolidador')
+    ver_roles_permission = Permission.find_or_create_by!(name: 'ver roles')
+    RolePermission.find_or_create_by!(role: role, permission: ver_roles_permission)
+    role
+  end
 
   before do
     admin_role
