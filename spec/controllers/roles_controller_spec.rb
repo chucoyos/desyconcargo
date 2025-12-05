@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe RolesController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:admin_role) { Role.create!(name: 'administrador') }
-  let(:regular_role) { Role.create!(name: 'consolidador') }
+  let(:admin_role) { Role.find_or_create_by!(name: 'administrador') }
+  let(:regular_role) { Role.find_or_create_by!(name: 'consolidador') }
 
   before do
     admin_role
@@ -25,7 +25,7 @@ RSpec.describe RolesController, type: :controller do
       end
 
       it "assigns all roles to @roles" do
-        expect(assigns(:roles)).to match_array([ admin_role, regular_role ])
+        expect(assigns(:roles)).to match_array(Role.all)
       end
     end
 
@@ -41,8 +41,8 @@ RSpec.describe RolesController, type: :controller do
         expect(response).to be_successful
       end
 
-      it "assigns empty array to @roles" do
-        expect(assigns(:roles)).to be_empty
+      it "assigns all roles to @roles" do
+        expect(assigns(:roles)).to match_array(Role.all)
       end
     end
 

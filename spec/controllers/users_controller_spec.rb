@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:admin_role) { Role.create!(name: 'administrador') }
+  let(:admin_role) { Role.find_or_create_by!(name: 'administrador') }
   let(:admin_user) { User.create!(email: 'admin@example.com', password: 'password123', role: admin_role) }
-  let(:user_role) { Role.create!(name: 'agente_aduanal') }
+  let(:user_role) { Role.find_or_create_by!(name: 'agente_aduanal') }
   let(:user_params) do
     {
       email: 'test@example.com',
