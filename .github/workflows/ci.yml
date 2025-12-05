@@ -92,8 +92,8 @@ jobs:
       - name: Start PostgreSQL
         run: |
           sudo systemctl start postgresql
-          sudo -u postgres createuser --createdb --superuser --no-password $USER || true
-          createdb test_app_system || true
+          sudo -u postgres psql -c "CREATE USER test_user WITH SUPERUSER PASSWORD 'test_password';" || true
+          sudo -u postgres createdb -O test_user test_app_system || true
 
       - name: Checkout code
         uses: actions/checkout@v5
@@ -106,7 +106,7 @@ jobs:
       - name: Run System Tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://$USER@localhost/test_app_system
+          DATABASE_URL: postgres://test_user:test_password@localhost/test_app_system
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
         run: |
