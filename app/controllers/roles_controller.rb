@@ -20,6 +20,7 @@ class RolesController < ApplicationController
   # GET /roles/1/edit
   def edit
     authorize @role
+    @permissions = policy_scope(Permission).order(:name)
   end
 
   # POST /roles or /roles.json
@@ -73,6 +74,6 @@ class RolesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def role_params
-      params.require(:role).permit(:name)
+      params.require(:role).permit(:name, permission_ids: [])
     end
 end

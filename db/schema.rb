@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_04_100633) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_05_054508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ports", force: :cascade do |t|
     t.string "country", null: false
@@ -20,6 +26,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_100633) do
     t.string "name", null: false
     t.string "uncode"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "role_permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "permission_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -63,6 +78,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_100633) do
     t.index ["shipping_line_id"], name: "index_vessels_on_shipping_line_id"
   end
 
+  add_foreign_key "role_permissions", "permissions"
+  add_foreign_key "role_permissions", "roles"
   add_foreign_key "users", "roles"
   add_foreign_key "vessels", "shipping_lines"
 end

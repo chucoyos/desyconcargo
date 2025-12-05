@@ -29,12 +29,28 @@ class User < ApplicationRecord
     role&.name == role_name
   end
 
+  def inactivo?
+    role&.name == Role::INACTIVO
+  end
+
+  # Verificar si el usuario tiene un permiso específico
+  def has_permission?(permission_name)
+    return true if administrador? # Administradores tienen todos los permisos
+    return false if inactivo? # Usuarios inactivos no tienen permisos
+    role&.has_permission?(permission_name) || false
+  end
+
+  # Verificar si el usuario puede realizar una acción específica
+  def can?(action)
+    has_permission?(action)
+  end
+
   # Asignar rol por defecto si no tiene uno
   after_create :assign_default_role
 
   private
 
   def assign_default_role
-    self.role ||= Role.almacen || Role.first
+    self.role ||= Role.inactivo || Role.first
   end
 end

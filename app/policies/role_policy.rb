@@ -1,36 +1,35 @@
 class RolePolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
-      # Solo administradores pueden ver todos los roles
-      user&.administrador? ? scope.all : scope.none
+      user&.can?("ver roles") || user&.can?("roles:read") ? scope.all : scope.none
     end
   end
 
   def index?
-    user&.administrador?
+    user&.can?("ver roles") || user&.can?("roles:read")
   end
 
   def show?
-    user&.administrador?
+    user&.can?("ver roles") || user&.can?("roles:read")
   end
 
   def create?
-    user&.administrador?
+    user&.can?("crear roles") || user&.can?("roles:create")
   end
 
   def new?
-    user&.administrador?
+    user&.can?("crear roles") || user&.can?("roles:create")
   end
 
   def update?
-    user&.administrador?
+    user&.can?("editar roles") || user&.can?("roles:update")
   end
 
   def edit?
-    user&.administrador?
+    user&.can?("editar roles") || user&.can?("roles:update")
   end
 
   def destroy?
-    user&.administrador?
+    user&.can?("eliminar roles") || user&.can?("roles:delete")
   end
 end

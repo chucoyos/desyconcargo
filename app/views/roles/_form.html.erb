@@ -41,6 +41,31 @@
     <p class="text-sm text-gray-600">Ingresa un nombre descriptivo para el rol (ej: Administrador, Agente Aduanal)</p>
   </div>
 
+  <!-- Permissions Section -->
+  <div class="space-y-4">
+    <label class="block text-sm font-semibold text-gray-700">
+      <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Permisos
+    </label>
+    <div class="bg-gray-50 rounded-xl p-4 max-h-64 overflow-y-auto">
+      <% if @permissions.present? %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <% @permissions.each do |permission| %>
+            <div class="flex items-center">
+              <%= form.check_box :permission_ids, { multiple: true, include_hidden: false }, permission.id, nil %>
+              <%= form.label "permission_ids_#{permission.id}", permission.name, class: "ml-2 text-sm text-gray-700" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-500">No hay permisos disponibles. <%= link_to "Crear permisos", new_permission_path, class: "text-blue-600 hover:text-blue-800" %></p>
+      <% end %>
+    </div>
+    <p class="text-sm text-gray-600">Selecciona los permisos que tendrá este rol</p>
+  </div>
+
   <!-- Submit Button -->
   <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
     <%= form.submit "Guardar Rol",

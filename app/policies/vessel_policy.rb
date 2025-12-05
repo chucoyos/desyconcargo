@@ -1,22 +1,22 @@
 class VesselPolicy < ApplicationPolicy
   def index?
-    true
+    user&.can?("ver buques") || user&.can?("vessels:read")
   end
 
   def show?
-    true
+    user&.can?("ver buques") || user&.can?("vessels:read")
   end
 
   def create?
-    true
+    user&.can?("crear buques") || user&.can?("vessels:create")
   end
 
   def update?
-    true
+    user&.can?("editar buques") || user&.can?("vessels:update")
   end
 
   def destroy?
-    true
+    user&.can?("eliminar buques") || user&.can?("vessels:delete")
   end
 
   class Scope < ApplicationPolicy::Scope

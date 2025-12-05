@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update ]
+  before_action :set_user, only: %i[ show edit update deactivate ]
 
   # GET /users or /users.json
   def index
@@ -50,6 +50,18 @@ class UsersController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH /users/1/deactivate
+  def deactivate
+    authorize @user, :deactivate?
+
+    @user.update(role: Role.find_by(name: Role::INACTIVO))
+
+    respond_to do |format|
+      format.html { redirect_to users_path, notice: "Usuario desactivado exitosamente.", status: :see_other }
+      format.json { head :no_content }
     end
   end
 

@@ -1,37 +1,39 @@
 class UserPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
-      # Solo administradores pueden ver todos los usuarios
-      user&.administrador? ? scope.all : scope.none
+      user&.can?("ver usuarios") || user&.can?("users:read") ? scope.all : scope.none
     end
   end
 
   def index?
-    user&.administrador?
+    user&.can?("ver usuarios") || user&.can?("users:read")
   end
 
   def show?
-    user&.administrador?
+    user&.can?("ver usuarios") || user&.can?("users:read")
   end
 
   def create?
-    user&.administrador?
+    user&.can?("crear usuarios") || user&.can?("users:create")
   end
 
   def new?
-    user&.administrador?
+    user&.can?("crear usuarios") || user&.can?("users:create")
   end
 
   def update?
-    user&.administrador?
+    user&.can?("editar usuarios") || user&.can?("users:update")
   end
 
   def edit?
-    user&.administrador?
+    user&.can?("editar usuarios") || user&.can?("users:update")
   end
 
   def destroy?
-    # Los administradores no pueden eliminarse a sí mismos
-    user&.administrador? && record != user
+    user&.can?("eliminar usuarios") || user&.can?("users:delete")
+  end
+
+  def deactivate?
+    user&.can?("desactivar usuarios") || user&.can?("users:deactivate")
   end
 end

@@ -91,6 +91,13 @@ es:
       success: "Rol actualizado exitosamente."
     destroy:
       success: "Rol eliminado exitosamente."
+  permissions:
+    create:
+      success: "Permiso creado exitosamente."
+    update:
+      success: "Permiso actualizado exitosamente."
+    destroy:
+      success: "Permiso eliminado exitosamente."
   users:
     create:
       success: "Usuario creado exitosamente."

@@ -1,26 +1,26 @@
 class ShippingLinePolicy < ApplicationPolicy
   def index?
-    true
+    user&.can?("ver líneas navieras") || user&.can?("shipping_lines:read")
   end
 
   def show?
-    true
+    user&.can?("ver líneas navieras") || user&.can?("shipping_lines:read")
   end
 
   def new?
-    true
+    user&.can?("crear líneas navieras") || user&.can?("shipping_lines:create")
   end
 
   def create?
-    true
+    user&.can?("crear líneas navieras") || user&.can?("shipping_lines:create")
   end
 
   def update?
-    true
+    user&.can?("editar líneas navieras") || user&.can?("shipping_lines:update")
   end
 
   def destroy?
-    true
+    user&.can?("eliminar líneas navieras") || user&.can?("shipping_lines:delete")
   end
 
   class Scope < ApplicationPolicy::Scope

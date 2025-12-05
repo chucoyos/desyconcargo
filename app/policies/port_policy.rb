@@ -1,22 +1,22 @@
 class PortPolicy < ApplicationPolicy
   def index?
-    true
+    user&.can?("ver puertos") || user&.can?("ports:read")
   end
 
   def show?
-    true
+    user&.can?("ver puertos") || user&.can?("ports:read")
   end
 
   def create?
-    true
+    user&.can?("crear puertos") || user&.can?("ports:create")
   end
 
   def update?
-    true
+    user&.can?("editar puertos") || user&.can?("ports:update")
   end
 
   def destroy?
-    true
+    user&.can?("eliminar puertos") || user&.can?("ports:delete")
   end
 
   class Scope < ApplicationPolicy::Scope
