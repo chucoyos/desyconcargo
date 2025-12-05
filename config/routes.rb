@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :roles
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [ :registrations ]
   resources :users, only: [ :index, :show, :new, :create, :edit, :update ]
   resources :shipping_lines
   resources :vessels
