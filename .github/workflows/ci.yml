@@ -77,6 +77,7 @@ jobs:
         run: |
           bin/rails db:create
           bin/rails db:migrate
+          bin/rails db:seed
           bin/rails db:schema:dump
           bin/rails db:test:prepare
           bundle exec rspec
@@ -111,6 +112,7 @@ jobs:
         run: |
           bin/rails db:create
           bin/rails db:migrate
+          bin/rails db:seed
           bin/rails db:schema:dump
           bin/rails db:test:prepare
           bundle exec rspec
