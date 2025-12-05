@@ -61,6 +61,14 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :role_id)
+      user_params = params.require(:user).permit(:email, :password, :password_confirmation, :role_id)
+
+      # Remove password parameters if they're blank to avoid clearing passwords
+      if user_params[:password].blank?
+        user_params.delete(:password)
+        user_params.delete(:password_confirmation)
+      end
+
+      user_params
     end
 end
