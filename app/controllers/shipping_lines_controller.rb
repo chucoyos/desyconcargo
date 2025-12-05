@@ -1,5 +1,6 @@
 class ShippingLinesController < ApplicationController
   def index
+    authorize ShippingLine
     @shipping_lines = policy_scope(ShippingLine).then do |scoped_lines|
       if params[:query].present?
         scoped_lines.where("name ILIKE ?", "%#{params[:query]}%")

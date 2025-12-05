@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   after_action :verify_authorized, if: -> { action_name != "index" && !params[:controller]&.start_with?("devise/") } unless Rails.env.test?
   after_action :verify_policy_scoped, if: -> { action_name == "index" && !params[:controller]&.start_with?("devise/") && params[:controller] != "home" } unless Rails.env.test?
+
+  # Handle unauthorized access
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = "No tienes permisos para acceder a esta página."
+    redirect_to(request.referrer || root_path)
+  end
 end

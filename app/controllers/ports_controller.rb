@@ -3,6 +3,7 @@ class PortsController < ApplicationController
 
   # GET /ports or /ports.json
   def index
+    authorize Port
     @ports = policy_scope(Port).then do |scoped_ports|
       if params[:query].present?
         scoped_ports.where("name ILIKE ? OR uncode ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
@@ -14,6 +15,7 @@ class PortsController < ApplicationController
 
   # GET /ports/1 or /ports/1.json
   def show
+    authorize @port
   end
 
   # GET /ports/new

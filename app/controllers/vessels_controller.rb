@@ -3,6 +3,7 @@ class VesselsController < ApplicationController
 
   # GET /vessels or /vessels.json
   def index
+    authorize Vessel
     @vessels = policy_scope(Vessel).includes(:shipping_line)
 
     # Apply search filter
@@ -20,6 +21,7 @@ class VesselsController < ApplicationController
 
   # GET /vessels/1 or /vessels/1.json
   def show
+    authorize @vessel
   end
 
   # GET /vessels/new
